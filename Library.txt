@@ -316,8 +316,8 @@ function Linux.Create(config)
     local TabIndicator = Linux.Instance("Frame", {
         Parent = TabHolder,
         BackgroundColor3 = Linux.Theme.Accent,
-        Size = UDim2.new(0, 4, 0, 20), -- Aumentei a largura pra 4 (mais gordinha) e reduzi a altura pra 20 (mais curta)
-        Position = UDim2.new(0, 0, 0, 5), -- Ajustei a posição inicial pra colar na aba
+        Size = UDim2.new(0, 4, 0, 20),
+        Position = UDim2.new(0, 0, 0, 5),
         ZIndex = 3
     })
 
@@ -332,7 +332,7 @@ function Linux.Create(config)
 
         local TabBtn = Linux.Instance("TextButton", {
             Parent = TabHolder,
-            BackgroundColor3 = Linux.Theme.TabInactive,
+            BackgroundTransparency = 1, -- Fundo transparente por padrão
             Size = UDim2.new(1, -5, 0, 28),
             Font = Enum.Font.SourceSans,
             Text = "",
@@ -422,19 +422,22 @@ function Linux.Create(config)
         TabBtn.MouseButton1Click:Connect(function()
             for _, tab in pairs(Tabs) do
                 tab.Content.Visible = false
+                tab.Button.BackgroundTransparency = 1 -- Torna o fundo transparente para abas não selecionadas
                 tab.Text.TextColor3 = Color3.fromRGB(150, 150, 150)
                 if tab.Icon then
                     tab.Icon.ImageColor3 = Color3.fromRGB(150, 150, 150)
                 end
             end
             TabContent.Visible = true
+            TabBtn.BackgroundTransparency = 0 -- Mostra o fundo quando a aba é selecionada
+            TabBtn.BackgroundColor3 = Linux.Theme.Element -- Define a cor do fundo
             TabText.TextColor3 = Color3.fromRGB(255, 255, 255)
             if TabIcon then
                 TabIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
             end
             CurrentTab = tabIndex
 
-            local targetY = 5 + (tabIndex - 1) * (28 + 3) + 4 -- Ajustei o cálculo pra alinhar com o centro da aba
+            local targetY = 5 + (tabIndex - 1) * (28 + 3) + 4
             local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             TweenService:Create(TabIndicator, tweenInfo, {Position = UDim2.new(0, 0, 0, targetY)}):Play()
         end)
@@ -449,12 +452,14 @@ function Linux.Create(config)
 
         if not CurrentTab then
             TabContent.Visible = true
+            TabBtn.BackgroundTransparency = 0 -- Mostra o fundo da primeira aba por padrão
+            TabBtn.BackgroundColor3 = Linux.Theme.Element
             TabText.TextColor3 = Color3.fromRGB(255, 255, 255)
             if TabIcon then
                 TabIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
             end
             CurrentTab = tabIndex
-            local initialY = 5 + (tabIndex - 1) * (28 + 3) + 4 -- Ajustei a posição inicial pra alinhar com o centro
+            local initialY = 5 + (tabIndex - 1) * (28 + 3) + 4
             TabIndicator.Position = UDim2.new(0, 0, 0, initialY)
         end
 
