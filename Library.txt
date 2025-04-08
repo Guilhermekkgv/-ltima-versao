@@ -9,27 +9,17 @@ local function DarkenColor(color, factor)
     return Color3.fromHSV(h, s, math.max(0, v * factor))
 end
 
-local Linux = {
-    Themes = {
-        Default = {
-            Background = DarkenColor(Color3.fromRGB(24, 24, 24), 0.8),
-            Element = DarkenColor(Color3.fromRGB(28, 28, 28), 0.8),
-            Accent = Color3.fromRGB(80, 120, 255),
-            Text = Color3.fromRGB(180, 180, 180),
-            Toggle = DarkenColor(Color3.fromRGB(40, 40, 40), 0.8),
-            TabInactive = DarkenColor(Color3.fromRGB(28, 28, 28), 0.8),
-            DropdownOption = DarkenColor(Color3.fromRGB(30, 30, 30), 0.8)
-        },
-        Darker = {
-            Background = Color3.fromRGB(30, 30, 30),
-            Element = Color3.fromRGB(70, 70, 70),
-            Accent = Color3.fromRGB(56, 109, 223),
-            Text = Color3.fromRGB(150, 150, 150),
-            Toggle = Color3.fromRGB(45, 45, 45),
-            TabInactive = Color3.fromRGB(35, 35, 35),
-            DropdownOption = Color3.fromRGB(35, 35, 35)
-        }
-    }
+local Linux = {}
+
+Linux.Theme = {
+    Background = DarkenColor(Color3.fromRGB(24, 24, 24), 0.8),
+    Element = DarkenColor(Color3.fromRGB(28, 28, 28), 0.8),
+    ElementBorder = Color3.fromRGB(40, 40, 40), -- Borda escura, mas visível
+    Accent = Color3.fromRGB(80, 120, 255),
+    Text = Color3.fromRGB(180, 180, 180),
+    Toggle = DarkenColor(Color3.fromRGB(40, 40, 40), 0.8),
+    TabInactive = DarkenColor(Color3.fromRGB(28, 28, 28), 0.8),
+    DropdownOption = DarkenColor(Color3.fromRGB(30, 30, 30), 0.8)
 }
 
 function Linux.Instance(class, props)
@@ -164,8 +154,6 @@ function Linux.Create(config)
     FakeUI.Name = "FakeUI"
     FakeUI.Enabled = false
     FakeUI.ResetOnSpawn = false
-
-    Linux.Theme = Linux.Themes[config.Theme or "Default"] or Linux.Themes.Default
 
     local tabWidth = config.TabWidth or 110
 
@@ -475,6 +463,12 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = BtnFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local Btn = Linux.Instance("TextButton", {
                 Parent = BtnFrame,
                 BackgroundTransparency = 1,
@@ -527,6 +521,12 @@ function Linux.Create(config)
             Linux.Instance("UICorner", {
                 Parent = Toggle,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = Toggle,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local Label = Linux.Instance("TextLabel", {
@@ -621,6 +621,12 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = Dropdown,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local Label = Linux.Instance("TextLabel", {
                 Parent = Dropdown,
                 BackgroundTransparency = 1,
@@ -668,9 +674,17 @@ function Linux.Create(config)
                 LayoutOrder = elementOrder + 1
             })
 
+            Linux越
+
             Linux.Instance("UICorner", {
                 Parent = DropFrame,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = DropFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local DropLayout = Linux.Instance("UIListLayout", {
@@ -735,6 +749,12 @@ function Linux.Create(config)
                         Linux.Instance("UICorner", {
                             Parent = OptBtn,
                             CornerRadius = UDim.new(0, 4)
+                        })
+
+                        Linux.Instance("UIStroke", {
+                            Parent = OptBtn,
+                            Color = Linux.Theme.ElementBorder,
+                            Thickness = 1
                         })
 
                         OptBtn.MouseButton1Click:Connect(function()
@@ -806,6 +826,12 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = MultiDropdown,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local Label = Linux.Instance("TextLabel", {
                 Parent = MultiDropdown,
                 BackgroundTransparency = 1,
@@ -856,6 +882,12 @@ function Linux.Create(config)
             Linux.Instance("UICorner", {
                 Parent = DropFrame,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = DropFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local DropLayout = Linux.Instance("UIListLayout", {
@@ -930,6 +962,12 @@ function Linux.Create(config)
                             CornerRadius = UDim.new(0, 4)
                         })
 
+                        Linux.Instance("UIStroke", {
+                            Parent = OptBtn,
+                            Color = Linux.Theme.ElementBorder,
+                            Thickness = 1
+                        })
+
                         OptBtn.MouseButton1Click:Connect(function()
                             if table.find(SelectedValues, opt) then
                                 for i, v in ipairs(SelectedValues) do
@@ -996,6 +1034,12 @@ function Linux.Create(config)
             Linux.Instance("UICorner", {
                 Parent = Slider,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = Slider,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local Label = Linux.Instance("TextLabel", {
@@ -1134,6 +1178,12 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = Input,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local Label = Linux.Instance("TextLabel", {
                 Parent = Input,
                 BackgroundTransparency = 1,
@@ -1231,6 +1281,12 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = LabelFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local LabelText = Linux.Instance("TextLabel", {
                 Parent = LabelFrame,
                 BackgroundTransparency = 1,
@@ -1295,6 +1351,12 @@ function Linux.Create(config)
             Linux.Instance("UICorner", {
                 Parent = Keybind,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = Keybind,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local Label = Linux.Instance("TextLabel", {
@@ -1446,139 +1508,6 @@ function Linux.Create(config)
             }
         end
 
-        function TabElements.ColorPicker(config)
-            elementOrder = elementOrder + 1
-            local ColorPicker = Linux.Instance("Frame", {
-                Parent = ElementContainer,
-                BackgroundColor3 = Linux.Theme.Element,
-                Size = UDim2.new(1, -5, 0, 80),
-                ZIndex = 1,
-                LayoutOrder = elementOrder
-            })
-
-            Linux.Instance("UICorner", {
-                Parent = ColorPicker,
-                CornerRadius = UDim.new(0, 4)
-            })
-
-            local Label = Linux.Instance("TextLabel", {
-                Parent = ColorPicker,
-                BackgroundTransparency = 1,
-                Size = UDim2.new(1, -10, 0, 20),
-                Position = UDim2.new(0, 5, 0, 5),
-                Font = Enum.Font.SourceSans,
-                Text = config.Name,
-                TextColor3 = Linux.Theme.Text,
-                TextSize = 14,
-                TextXAlignment = Enum.TextXAlignment.Left,
-                ZIndex = 1
-            })
-
-            local ColorPreview = Linux.Instance("Frame", {
-                Parent = ColorPicker,
-                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-                Size = UDim2.new(0, 20, 0, 20),
-                Position = UDim2.new(1, -25, 0, 5),
-                ZIndex = 1
-            })
-
-            Linux.Instance("UICorner", {
-                Parent = ColorPicker,
-                CornerRadius = UDim.new(0, 4)
-            })
-
-            local Palette = Linux.Instance("ImageButton", {
-                Parent = ColorPicker,
-                BackgroundColor3 = Color3.fromRGB(255, 0, 0),
-                Size = UDim2.new(1, -10, 0, 60),
-                Position = UDim2.new(0, 5, 0, 25),
-                Image = "rbxassetid://698052001",
-                ZIndex = 1,
-                AutoButtonColor = false
-            })
-
-            Linux.Instance("UICorner", {
-                Parent = Palette,
-                CornerRadius = UDim.new(0, 4)
-            })
-
-            local PaletteKnob = Linux.Instance("Frame", {
-                Parent = Palette,
-                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-                Size = UDim2.new(0, 8, 0, 8),
-                Position = UDim2.new(1, -4, 1, -4),
-                ZIndex = 2
-            })
-
-            Linux.Instance("UICorner", {
-                Parent = PaletteKnob,
-                CornerRadius = UDim.new(1, 0)
-            })
-
-            local Hue = 0
-            local Saturation = 1
-            local Value = 1
-
-            local function UpdateColor()
-                local color = Color3.fromHSV(Hue, Saturation, Value)
-                Palette.BackgroundColor3 = Color3.fromHSV(Hue, 1, 1)
-                ColorPreview.BackgroundColor3 = color
-                spawn(function() Linux:SafeCallback(config.Callback, color) end)
-            end
-
-            local draggingPalette = false
-            Palette.InputBegan:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    draggingPalette = true
-                    local posX = input.Position.X
-                    local posY = input.Position.Y
-                    local paletteSize = Palette.AbsoluteSize
-                    local relativeX = math.clamp((posX - Palette.AbsolutePosition.X) / paletteSize.X, 0, 1)
-                    local relativeY = math.clamp((posY - Palette.AbsolutePosition.Y) / paletteSize.Y, 0, 1)
-                    Saturation = relativeX
-                    Value = 1 - relativeY
-                    PaletteKnob.Position = UDim2.new(relativeX, -4, relativeY, -4)
-                    UpdateColor()
-                end
-            end)
-
-            Palette.InputChanged:Connect(function(input)
-                if (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) and draggingPalette then
-                    local posX = input.Position.X
-                    local posY = input.Position.Y
-                    local paletteSize = Palette.AbsoluteSize
-                    local relativeX = math.clamp((posX - Palette.AbsolutePosition.X) / paletteSize.X, 0, 1)
-                    local relativeY = math.clamp((posY - Palette.AbsolutePosition.Y) / paletteSize.Y, 0, 1)
-                    Saturation = relativeX
-                    Value = 1 - relativeY
-                    PaletteKnob.Position = UDim2.new(relativeX, -4, relativeY, -4)
-                    UpdateColor()
-                end
-            end)
-
-            Palette.InputEnded:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    draggingPalette = false
-                end
-            end)
-
-            UpdateColor()
-
-            local function SetColor(newColor)
-                local h, s, v = newColor:ToHSV()
-                Hue = h
-                Saturation = s
-                Value = v
-                PaletteKnob.Position = UDim2.new(Saturation, -4, 1 - Value, -4)
-                UpdateColor()
-            end
-
-            return {
-                Instance = ColorPicker,
-                SetColor = SetColor
-            }
-        end
-
         function TabElements.Paragraph(config)
             elementOrder = elementOrder + 1
             local ParagraphFrame = Linux.Instance("Frame", {
@@ -1593,6 +1522,12 @@ function Linux.Create(config)
             Linux.Instance("UICorner", {
                 Parent = ParagraphFrame,
                 CornerRadius = UDim.new(0, 4)
+            })
+
+            Linux.Instance("UIStroke", {
+                Parent = ParagraphFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
             })
 
             local Title = Linux.Instance("TextLabel", {
@@ -1658,6 +1593,15 @@ function Linux.Create(config)
                 CornerRadius = UDim.new(0, 4)
             })
 
+            Linux.Instance("UIStroke", {
+                Parent = Notification
+                
+                Linux.Instance("UIStroke", {
+                Parent = NotificationFrame,
+                Color = Linux.Theme.ElementBorder,
+                Thickness = 1
+            })
+
             local Label = Linux.Instance("TextLabel", {
                 Parent = NotificationFrame,
                 BackgroundTransparency = 1,
@@ -1671,29 +1615,36 @@ function Linux.Create(config)
                 ZIndex = 1
             })
 
-            local NotificationText = Linux.Instance("TextLabel", {
+            local NotifyBtn = Linux.Instance("TextButton", {
                 Parent = NotificationFrame,
-                BackgroundTransparency = 1,
-                Size = UDim2.new(0.5, -10, 1, 0),
-                Position = UDim2.new(0.5, 5, 0, 0),
+                BackgroundColor3 = Linux.Theme.Toggle,
+                Size = UDim2.new(0, 60, 0, 20),
+                Position = UDim2.new(1, -65, 0.5, -10),
                 Font = Enum.Font.SourceSans,
-                Text = config.Default or "No interaction yet",
+                Text = "Notify",
                 TextColor3 = Linux.Theme.Text,
                 TextSize = 14,
-                TextXAlignment = Enum.TextXAlignment.Right,
-                TextTruncate = Enum.TextTruncate.AtEnd,
-                ZIndex = 1
+                TextScaled = true,
+                TextXAlignment = Enum.TextXAlignment.Center,
+                ZIndex = 2,
+                AutoButtonColor = false
             })
 
-            local function SetText(newText)
-                NotificationText.Text = tostring(newText)
-            end
+            Linux.Instance("UICorner", {
+                Parent = NotifyBtn,
+                CornerRadius = UDim.new(0, 4)
+            })
 
-            return {
-                Instance = NotificationFrame,
-                SetText = SetText,
-                GetText = function() return NotificationText.Text end
-            }
+            NotifyBtn.MouseButton1Click:Connect(function()
+                Linux:Notify({
+                    Title = config.Name,
+                    Content = config.Content,
+                    SubContent = config.SubContent,
+                    Duration = config.Duration or 5
+                })
+            end)
+
+            return NotificationFrame
         end
 
         return TabElements
